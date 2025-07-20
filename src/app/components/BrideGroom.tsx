@@ -56,7 +56,7 @@ const BrideGroom = () => {
               couple[0].reverse ? "space-y-reverse" : ""
             }`}
           >
-            <div className="relative w-72 h-96">
+            <div className="relative w-48 h-72 md:w-64 lg:h-96 mb-12">
               <Image
                 src={couple[0].avatar}
                 alt={`${couple[0].name} Avatar`}
@@ -108,7 +108,7 @@ const BrideGroom = () => {
               couple[1].reverse ? "space-y-reverse" : ""
             }`}
           >
-            <div className="relative w-72 h-96">
+            <div className="relative w-48 h-72 md:w-64 lg:h-96 mt-12">
               <Image
                 src={couple[1].avatar}
                 alt={`${couple[1].name} Avatar`}

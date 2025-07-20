@@ -29,12 +29,11 @@ export default function Message() {
     },
     {
       id: 3,
-      name: "David & Lisa",
+      name: "Sarah & Michael",
       message:
-        "Congratulations on your special day! Wishing you both a lifetime of love and happiness together.",
-      date: "2024-11-12",
+        "Sending lots of love to both of you on your wedding day. Congrats!",
+      date: "2024-11-10",
     },
-    // ... (dst)
   ]);
 
   const [newMessage, setNewMessage] = useState<{
@@ -58,7 +57,6 @@ export default function Message() {
     }
   };
 
-  // Setup animasi Framer Motion
   const ref = useRef(null);
   const inView = useInView(ref, { once: false, amount: 0.2 });
   const controls = useAnimation();
@@ -81,7 +79,7 @@ export default function Message() {
       <div className="absolute inset-0 bg-black bg-opacity-50"></div>
 
       <div ref={ref} className="relative max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 md:mb-16">
           <Gem className="w-12 h-12 mx-auto text-orange-400 mb-4 animate-pulse" />
           <h2 className="text-4xl md:text-5xl font-light text-white font-italiana">
             Wedding Wishes
@@ -91,7 +89,7 @@ export default function Message() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
           <motion.div
             initial="hidden"
             animate={controls}
@@ -100,7 +98,7 @@ export default function Message() {
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-white/10 backdrop-blur-lg p-8 border border-white/20 h-[300px] sticky top-24"
+            className="bg-white/10 backdrop-blur-lg p-6 md:p-8 lg:p-12 border border-white/20 h-auto md:h-[380px] sticky md:top-24"
           >
             <h3 className="text-xl mb-6 text-orange-400 uppercase font-semibold">
               Send Your Wishes
@@ -141,18 +139,22 @@ export default function Message() {
               visible: { opacity: 1, y: 0 },
             }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="bg-white/5 backdrop-blur-lg border border-white/20 p-6 max-h-[300px] overflow-y-auto space-y-6 scrollbar-thin scrollbar-thumb-orange-400 scrollbar-track-white/10"
+            className="bg-white/5 backdrop-blur-lg border border-white/20 p-6 md:p-8 lg:p-12 max-h-[400px] md:max-h-[380px] overflow-y-auto space-y-6 scrollbar-thin scrollbar-thumb-orange-400 scrollbar-track-white/10"
           >
             {messages.map((msg) => (
               <div
                 key={msg.id}
-                className="bg-white/10 backdrop-blur-lg p-6 border border-white/20"
+                className="bg-white/10 backdrop-blur-lg p-4 md:p-6 border border-white/20"
               >
                 <div className="flex justify-between items-start mb-3">
                   <h4 className="font-medium text-orange-400">{msg.name}</h4>
-                  <span className="text-sm text-gray-300">{msg.date}</span>
+                  <span className="text-xs md:text-sm text-gray-300">
+                    {msg.date}
+                  </span>
                 </div>
-                <p className="text-gray-100 leading-relaxed">{msg.message}</p>
+                <p className="text-gray-100 text-sm md:text-base leading-relaxed">
+                  {msg.message}
+                </p>
               </div>
             ))}
           </motion.div>

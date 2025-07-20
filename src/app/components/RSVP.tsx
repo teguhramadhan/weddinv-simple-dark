@@ -20,24 +20,6 @@ export default function RSVP() {
 
   return (
     <section className="relative py-20 bg-black overflow-hidden">
-      {/* ORNAMENT TOP LEFT */}
-      <Image
-        src="/images/ornaments/ornaments-side-left.png"
-        alt="Ornament Top Left"
-        width={48}
-        height={48}
-        className="absolute hidden md:block top-12 left-12 object-contain opacity-50 drop-shadow-lg"
-      />
-
-      {/* ORNAMENT BOTTOM RIGHT */}
-      <Image
-        src="/images/ornaments/ornaments-side-right.png"
-        alt="Ornament Bottom Right"
-        width={48}
-        height={48}
-        className="absolute bottom-12 right-12 object-contain opacity-50 drop-shadow-lg"
-      />
-
       <div ref={ref} className="max-w-2xl mx-auto px-6 text-center">
         <motion.div
           initial="hidden"
@@ -54,9 +36,9 @@ export default function RSVP() {
               <Image
                 src="/images/ornaments/ornaments-top.png"
                 alt="Ornament Top"
-                width={72}
-                height={72}
-                className="object-contain opacity-50 drop-shadow-lg"
+                width={200}
+                height={200}
+                className="object-contain drop-shadow-lg"
               />
             </div>
             <h2 className="text-4xl md:text-5xl uppercase mb-4 tracking-widest text-white font-italiana font-bold">

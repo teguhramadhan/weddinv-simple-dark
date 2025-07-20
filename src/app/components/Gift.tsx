@@ -69,11 +69,11 @@ const GiftSection = () => {
     <div className="bg-black text-white py-16 px-4">
       <div className="max-w-full mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-2">
           <h2 className="text-4xl lg:text-6xl font-light mb-4 font-italiana">
             Wedding Gift
           </h2>
-          <p className="text-gray-500 lg:max-w-2xl mx-auto text-lg mb-8">
+          <p className="text-gray-500 lg:max-w-3xl mx-auto text-xs lg:text-lg mb-8">
             Your prayers and blessings are a truly meaningful gift to us.
             However, if giving is an expression of love, you can give a gift
             through various payment methods below.
@@ -81,16 +81,18 @@ const GiftSection = () => {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-orange-400 hover:bg-orange-500 text-black font-semibold py-4 px-8 text-xl transition inline-flex items-center gap-3"
+            className="relative py-4 px-8 border border-orange-500 text-sm md:text-base lg:text-lg font-medium text-orange-400 hover:text-white overflow-hidden transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:w-0 before:bg-orange-600 before:transition-all before:duration-500 before:ease-out hover:before:w-full inline-block items-center gap-2 whitespace-nowrap"
           >
-            <Gift className="w-6 h-6" />
-            Open Gift Info
+            <span className="relative inline-flex gap-4 z-10">
+              <Gift className="w-4 h-4 md:w-5 md:h-5" />
+              Open Gift Info
+            </span>
           </button>
         </div>
 
         {/* Footer Message */}
-        <div className="text-center mt-12 p-8">
-          <p className="text-gray-300 text-lg lg:max-w-lg mx-auto leading-relaxed">
+        <div className="text-center mt-2 p-8">
+          <p className="text-gray-300 text-xs lg:text-lg lg:max-w-lg mx-auto leading-relaxed">
             Thank you for your presence and prayers. May it be a blessing for us
             both.
           </p>

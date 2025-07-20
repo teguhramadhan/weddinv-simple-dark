@@ -99,7 +99,7 @@ export default function Gallery() {
           className="text-center mb-16"
         >
           <Camera className="w-12 h-12 mx-auto text-orange-400 mb-4" />
-          <h2 className="text-4xl md:text-5xl font-light font-italiana">
+          <h2 className="text-4xl md:text-5xl font-light font-italiana text-white">
             Our Captured Moment
           </h2>
           <p className="text-gray-400 mt-4">

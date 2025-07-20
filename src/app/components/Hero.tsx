@@ -48,7 +48,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
-          className="min-h-screen flex items-center justify-center relative overflow-hidden"
+          className="min-h-screen flex items-center justify-center relative overflow-hidden text-white"
         >
           {/* BG Image */}
           <div
@@ -84,7 +84,7 @@ export default function Hero() {
             </p>
 
             <p className="text-lg text-orange-400 font-semibold mb-6">
-              December 25, 2024 • 2:00 PM
+              December 27, 2024
             </p>
 
             <button
