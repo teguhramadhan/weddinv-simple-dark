@@ -29,7 +29,7 @@ export default function RSVP() {
             visible: { opacity: 1, y: 0 },
           }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-gray-900/40 px-8 pt-8 pb-14 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-[1.02]"
+          className="bg-gray-900/40 px-0 pt-8 pb-14 shadow-lg backdrop-blur-sm transition-transform duration-500 hover:scale-[1.02]"
         >
           <div className="space-y-6">
             <div className="flex justify-center mb-4">
@@ -68,12 +68,12 @@ export default function RSVP() {
               <input
                 type="text"
                 placeholder="Confirmation Number"
-                className="w-full bg-transparent border border-gray-700  px-4 py-3 text-white placeholder-gray-500 focus:border-orange-400 focus:outline-none transition-colors"
+                className="w-full bg-transparent border border-gray-700 px-4 py-3 text-white placeholder-gray-500 focus:border-orange-400 focus:outline-none transition-colors"
               />
             </div>
 
             <div>
-              <select className="w-full bg-transparent border border-gray-700  px-4 py-3 text-white focus:border-orange-400 focus:outline-none transition-colors">
+              <select className="w-full bg-transparent border border-gray-700 px-4 py-3 text-white focus:border-orange-400 focus:outline-none transition-colors">
                 <option value="" className="bg-gray-900 text-gray-700">
                   Will you attend?
                 </option>
