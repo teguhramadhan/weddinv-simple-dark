@@ -11,11 +11,13 @@ import Footer from "./components/Footer";
 import WeddingDetails from "./components/WeddingDetails";
 import GiftSection from "./components/Gift";
 import BrideGroom from "./components/BrideGroom";
+import Gretting from "./components/Greeting";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-black font-inter">
       <Hero />
+      <Gretting />
       <BrideGroom />
       <WeddingDetails />
       <Countdown />
