@@ -1,315 +1,278 @@
-"use client";
+import React from "react";
+import { Calendar, MapPin, Clock } from "lucide-react";
 
-import { Calendar, Clock, MapPin, Navigation, Sparkles } from "lucide-react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { JSX, useEffect, useState } from "react";
-
-export default function WeddingDetails() {
-  const [windowWidth, setWindowWidth] = useState(0);
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      setWindowWidth(window.innerWidth);
-    }
-  }, []);
-
+const WeddingDetails = () => {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="relative w-full min-h-screen flex flex-col items-center justify-center py-20 md:py-32 px-4 bg-fixed bg-center bg-cover"
+    <div
+      className="flex items-center justify-center p-12 relative overflow-hidden"
       style={{
-        backgroundImage:
-          "url('https://plus.unsplash.com/premium_photo-1673897847791-503a222307a8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
       }}
     >
-      {/* Enhanced Overlay with Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/80 to-black/90"></div>
+      {/* Floating Ornaments */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Floating Petals */}
+        <div
+          className="absolute top-20 left-10 w-3 h-3 bg-orange-300/40 transform rotate-45 animate-bounce"
+          style={{ animationDelay: "0s", animationDuration: "3s" }}
+        ></div>
+        <div
+          className="absolute top-32 right-20 w-2 h-2 bg-orange-400/50 rounded-full animate-pulse"
+          style={{ animationDelay: "1s", animationDuration: "4s" }}
+        ></div>
+        <div
+          className="absolute top-40 left-1/4 w-1 h-6 bg-orange-200/30 animate-bounce"
+          style={{ animationDelay: "2s", animationDuration: "5s" }}
+        ></div>
 
-      {/* Floating Particles */}
-      {windowWidth > 0 && (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-orange-400/30"
-              initial={{
-                x: Math.random() * windowWidth,
-                y: window.innerHeight + 100,
-                opacity: 0,
-              }}
-              animate={{
-                y: -100,
-                opacity: [0, 1, 0],
-                scale: [0, 1, 0],
-              }}
-              transition={{
-                duration: Math.random() * 10 + 10,
-                repeat: Infinity,
-                delay: Math.random() * 5,
-              }}
-            />
-          ))}
+        {/* Floating Hearts */}
+        <div className="absolute top-16 right-1/3 w-4 h-4 opacity-60 animate-float">
+          <div className="text-orange-300/50 text-sm">♥</div>
         </div>
-      )}
-
-      {/* Save the Date Icon */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
-        whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-        transition={{
-          duration: 1.2,
-          delay: 0.2,
-          type: "spring",
-          stiffness: 100,
-        }}
-        className="relative z-10 mb-16 md:mb-20"
-      >
-        <div className="relative">
-          <Image
-            src="/images/ornaments/savethedate_ic.png"
-            alt="Save The Date Icon"
-            width={120}
-            height={120}
-            className="object-contain md:w-[160px] md:h-[160px]"
-          />
+        <div className="absolute bottom-20 left-1/3 w-4 h-4 opacity-40 animate-float-delayed">
+          <div className="text-orange-400/40 text-xs">♥</div>
         </div>
-      </motion.div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl">
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.4 }}
-          className="relative bg-black/5 backdrop-blur-sm border border-white/10 overflow-hidden"
-        >
-          {/* Shimmer Border */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-orange-400/20 to-transparent -translate-x-full animate-[shimmer_3s_ease-in-out_infinite]"></div>
+        {/* Glowing Particles */}
+        <div className="absolute top-1/3 left-16 w-1 h-1 bg-orange-300/60 rounded-full animate-twinkle"></div>
+        <div
+          className="absolute top-2/3 right-24 w-1 h-1 bg-orange-400/50 rounded-full animate-twinkle"
+          style={{ animationDelay: "1.5s" }}
+        ></div>
+        <div
+          className="absolute bottom-1/3 left-1/2 w-1 h-1 bg-orange-200/60 rounded-full animate-twinkle"
+          style={{ animationDelay: "3s" }}
+        ></div>
 
-          {/* Akad Nikah */}
-          <div className="relative p-8 md:p-12 lg:p-20 border-b border-white/10">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center mb-6 md:mb-8">
-                <div className="h-px w-16 md:w-20 bg-gradient-to-r from-transparent to-orange-400"></div>
-                <Sparkles className="mx-4 md:mx-6 w-5 h-5 md:w-6 md:h-6 text-orange-400" />
-                <div className="h-px w-16 md:w-20 bg-gradient-to-l from-transparent to-orange-400"></div>
-              </div>
-
-              <h3 className="text-lg md:text-2xl lg:text-4xl font-italiana text-white mb-8 md:mb-12 tracking-[0.1em] uppercase">
-                Akad Nikah
-              </h3>
-
-              {/* Date Display */}
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="relative mb-12 md:mb-16"
-              >
-                <div className="flex items-center justify-center gap-4 md:gap-8 lg:gap-12">
-                  <div className="relative">
-                    <span className="text-3xl md:text-5xl lg:text-7xl font-extralight text-orange-400">
-                      27
-                    </span>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-6 md:w-8 h-px bg-orange-400"></div>
-                  </div>
-                  <div className="relative">
-                    <span className="text-3xl md:text-5xl lg:text-7xl border-l-2 border-r-2 px-4 md:px-8 font-inter text-orange-400 uppercase">
-                      Des
-                    </span>
-                  </div>
-                  <div className="relative">
-                    <span className="text-3xl md:text-5xl lg:text-7xl font-extralight text-orange-400">
-                      25
-                    </span>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-6 md:w-8 h-px bg-orange-400"></div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Event Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 max-w-5xl mx-auto">
-                {/* Time */}
-                <EventCard
-                  icon={<Clock className="w-6 h-6 text-orange-400" />}
-                  label="Time"
-                  value="10:00 - 11:00"
-                  sub="WIB"
-                />
-                {/* Venue */}
-                <EventCard
-                  icon={<MapPin className="w-6 h-6 text-orange-400" />}
-                  label="Venue"
-                  value="St. Mary Cathedral"
-                  sub="123 Wedding Street, City Center"
-                />
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Resepsi Nikah */}
-          <div className="relative p-8 md:p-12 lg:p-20 border-b border-white/10">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center mb-6 md:mb-8">
-                <div className="h-px w-16 md:w-20 bg-gradient-to-r from-transparent to-orange-400"></div>
-                <Sparkles className="mx-4 md:mx-6 w-5 h-5 md:w-6 md:h-6 text-orange-400" />
-                <div className="h-px w-16 md:w-20 bg-gradient-to-l from-transparent to-orange-400"></div>
-              </div>
-
-              <h3 className="text-lg md:text-2xl lg:text-4xl font-italiana text-white mb-8 md:mb-12 tracking-[0.1em] uppercase">
-                Resepsi Pernikahan
-              </h3>
-
-              {/* Date Display */}
-              <motion.div
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.8 }}
-                className="relative mb-12 md:mb-16"
-              >
-                <div className="flex items-center justify-center gap-4 md:gap-8 lg:gap-12">
-                  <div className="relative">
-                    <span className="text-3xl md:text-5xl lg:text-7xl font-extralight text-orange-400">
-                      27
-                    </span>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-6 md:w-8 h-px bg-orange-400"></div>
-                  </div>
-                  <div className="relative">
-                    <span className="text-3xl md:text-5xl lg:text-7xl border-l-2 border-r-2 px-4 md:px-8 font-inter text-orange-400 uppercase">
-                      Des
-                    </span>
-                  </div>
-                  <div className="relative">
-                    <span className="text-3xl md:text-5xl lg:text-7xl font-extralight text-orange-400">
-                      25
-                    </span>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-6 md:w-8 h-px bg-orange-400"></div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Event Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 max-w-5xl mx-auto">
-                {/* Time */}
-                <EventCard
-                  icon={<Clock className="w-6 h-6 text-orange-400" />}
-                  label="Time"
-                  value="11:30 - 13:30"
-                  sub="WIB"
-                />
-                {/* Venue */}
-                <EventCard
-                  icon={<MapPin className="w-6 h-6 text-orange-400" />}
-                  label="Venue"
-                  value="St. Mary Cathedral"
-                  sub="123 Wedding Street, City Center"
-                />
-              </div>
-            </motion.div>
-          </div>
-
-          {/* CTA */}
-          <div className="relative p-8 md:p-12 lg:p-20">
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="text-center"
-            >
-              <motion.a
-                href="https://www.google.com/maps/place/St.+Mary's+Cathedral"
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 1.6 }}
-                className="relative group inline-flex items-center px-8 md:px-16 py-4 md:py-6 bg-black/50 border-2 border-orange-400 text-orange-400 overflow-hidden transition-all duration-700 hover:text-black hover:border-orange-500"
-              >
-                <div className="absolute inset-0 bg-orange-400 transform scale-x-0 origin-left transition-transform duration-700 group-hover:scale-x-100"></div>
-                <div className="absolute inset-0 border-2 border-orange-500/30 transform scale-110 opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
-                <Navigation className="relative w-5 h-5 md:w-6 md:h-6 mr-3 md:mr-4 z-10 group-hover:rotate-12 transition-transform duration-300" />
-                <span className="relative z-10 text-sm md:text-xl font-light tracking-[0.2em] uppercase">
-                  Get Directions
-                </span>
-              </motion.a>
-            </motion.div>
-          </div>
-        </motion.div>
+        {/* Elegant Lines */}
+        <div className="absolute top-24 right-32 w-12 h-px bg-gradient-to-r from-transparent via-orange-300/40 to-transparent animate-slide-right"></div>
+        <div className="absolute bottom-32 left-24 w-16 h-px bg-gradient-to-l from-transparent via-orange-400/30 to-transparent animate-slide-left"></div>
       </div>
 
-      {/* Bottom Decorative */}
-      <motion.div
-        initial={{ scaleX: 0, opacity: 0 }}
-        whileInView={{ scaleX: 1, opacity: 1 }}
-        transition={{ duration: 2, delay: 1.8 }}
-        className="relative z-10 mt-12 md:mt-20"
-      >
-        <div className="w-40 md:w-64 h-px bg-gradient-to-r from-transparent via-orange-400 to-transparent"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-orange-400 rotate-45"></div>
-      </motion.div>
+      <div className="w-full max-w-6xl mx-auto relative z-10">
+        {/* Main Container */}
+        <div className="p-8 md:p-12 shadow-2xl">
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="w-16 h-1 bg-gradient-to-r from-orange-300 to-orange-500 mx-auto mb-6 animate-glow"></div>
+            <h2 className="text-3xl md:text-4xl font-light text-white mb-2 font-italiana animate-fade-in">
+              Save The Date
+            </h2>
+            <p className="text-white/80 font-light animate-fade-in-delayed">
+              Thursday, November 6th, 2025
+            </p>
+            <p className="text-white lg:text-2xl max-w-full lg:max-w-lg mx-auto font-semibold mt-12 animate-fade-in-slow">
+              Plataran Menteng, Jalan HOS. Cokroaminoto, RT.6/RW.4, Gondangdia,
+              Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta, Indonesia.
+            </p>
+          </div>
+
+          {/* Map Button */}
+          <div className="text-center mt-8">
+            <button className="relative px-6 md:px-8 py-3 border border-orange-500 text-sm md:text-base lg:text-lg font-medium text-orange-400 hover:text-white overflow-hidden transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:w-0 before:bg-orange-600 before:transition-all before:duration-500 before:ease-out hover:before:w-full inline-block items-center gap-2 whitespace-nowrap animate-gentle-pulse">
+              <span className="relative z-10 uppercase flex items-center gap-2">
+                <MapPin className="w-4 h-4 md:w-5 md:h-5" />
+                Open Invitation
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Enhanced Decorative Elements */}
+        <div className="absolute top-1/4 left-10 w-20 h-20 bg-orange-200/20 blur-xl animate-pulse-slow"></div>
+        <div className="absolute bottom-1/4 right-10 w-32 h-32 bg-orange-300/15 blur-2xl animate-float-gentle"></div>
+        <div className="absolute top-1/3 right-20 w-16 h-16 bg-orange-400/10 blur-lg animate-twinkle-slow"></div>
+      </div>
 
       <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
+        @keyframes float {
+          0%,
           100% {
-            transform: translateX(100%);
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(5deg);
           }
         }
-      `}</style>
-    </motion.section>
-  );
-}
 
-function EventCard({
-  icon,
-  label,
-  value,
-  sub,
-}: {
-  icon: JSX.Element;
-  label: string;
-  value: string;
-  sub: string;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
-      className="group relative bg-white/5 backdrop-blur-sm p-6 md:p-8 border border-white/10 hover:border-orange-400/30 transition-all duration-500"
-    >
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-orange-400/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-      <div className="flex items-start gap-4 md:gap-6">
-        <div className="w-10 h-10 md:w-12 md:h-12 bg-orange-400/20 flex items-center justify-center">
-          {icon}
-        </div>
-        <div className="text-left">
-          <p className="text-xs md:text-sm text-gray-400 uppercase tracking-[0.2em] mb-1 md:mb-3">
-            {label}
-          </p>
-          <p className="text-xl md:text-2xl font-light text-white tracking-wide">
-            {value}
-          </p>
-          <p className="text-xs md:text-sm text-orange-400 mt-1 md:mt-2">
-            {sub}
-          </p>
-        </div>
-      </div>
-    </motion.div>
+        @keyframes float-delayed {
+          0%,
+          100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-15px) rotate(-5deg);
+          }
+        }
+
+        @keyframes twinkle {
+          0%,
+          100% {
+            opacity: 0.3;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1.5);
+          }
+        }
+
+        @keyframes slide-right {
+          0% {
+            transform: translateX(-100px);
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(100px);
+            opacity: 0;
+          }
+        }
+
+        @keyframes slide-left {
+          0% {
+            transform: translateX(100px);
+            opacity: 0;
+          }
+          50% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateX(-100px);
+            opacity: 0;
+          }
+        }
+
+        @keyframes glow {
+          0%,
+          100% {
+            box-shadow: 0 0 5px rgba(251, 146, 60, 0.3);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(251, 146, 60, 0.6);
+          }
+        }
+
+        @keyframes fade-in {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in-delayed {
+          0% {
+            opacity: 0;
+            transform: translateY(15px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fade-in-slow {
+          0% {
+            opacity: 0;
+            transform: translateY(25px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes gentle-pulse {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.02);
+          }
+        }
+
+        @keyframes pulse-slow {
+          0%,
+          100% {
+            opacity: 0.2;
+          }
+          50% {
+            opacity: 0.4;
+          }
+        }
+
+        @keyframes float-gentle {
+          0%,
+          100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-5px);
+          }
+        }
+
+        @keyframes twinkle-slow {
+          0%,
+          100% {
+            opacity: 0.1;
+          }
+          50% {
+            opacity: 0.3;
+          }
+        }
+
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 5s ease-in-out infinite;
+        }
+        .animate-twinkle {
+          animation: twinkle 2s ease-in-out infinite;
+        }
+        .animate-slide-right {
+          animation: slide-right 8s linear infinite;
+        }
+        .animate-slide-left {
+          animation: slide-left 10s linear infinite;
+        }
+        .animate-glow {
+          animation: glow 3s ease-in-out infinite;
+        }
+        .animate-fade-in {
+          animation: fade-in 1s ease-out;
+        }
+        .animate-fade-in-delayed {
+          animation: fade-in-delayed 1.5s ease-out;
+        }
+        .animate-fade-in-slow {
+          animation: fade-in-slow 2s ease-out;
+        }
+        .animate-gentle-pulse {
+          animation: gentle-pulse 4s ease-in-out infinite;
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 4s ease-in-out infinite;
+        }
+        .animate-float-gentle {
+          animation: float-gentle 6s ease-in-out infinite;
+        }
+        .animate-twinkle-slow {
+          animation: twinkle-slow 5s ease-in-out infinite;
+        }
+      `}</style>
+    </div>
   );
-}
+};
+
+export default WeddingDetails;
