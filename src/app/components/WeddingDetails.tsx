@@ -1,5 +1,5 @@
 import React from "react";
-import { Calendar, MapPin, Clock } from "lucide-react";
+import { MapPin } from "lucide-react";
 
 const WeddingDetails = () => {
   return (

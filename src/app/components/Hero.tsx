@@ -13,7 +13,7 @@ interface HeartPos {
 
 export default function Hero() {
   const [hearts, setHearts] = useState<HeartPos[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
