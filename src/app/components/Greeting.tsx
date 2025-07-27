@@ -40,7 +40,7 @@ const Gretting = () => {
           {/* Blessing Message */}
           <div className="text-center mb-12 animate-fade-in-slow">
             <h3 className="text-xl md:text-2xl font-medium text-orange-300 mb-6 font-italiana">
-              Allah's Blessing Message
+              Allah&apos;s Blessing Message
             </h3>
 
             {/* Arabic Text */}
@@ -64,11 +64,11 @@ const Gretting = () => {
 
             <blockquote className="text-center">
               <p className="text-white/90 text-xs md:text-lg leading-relaxed italic mb-6 max-w-3xl mx-auto">
-                "And among the signs of His power is that He created for you
-                wives of your own kind, so that you would be inclined and feel
-                at ease with them, and He made among you a feeling of love and
-                affection. Indeed, in that there are truly signs for a person
-                who thinks."
+                &quot;And among the signs of His power is that He created for
+                you wives of your own kind, so that you would be inclined and
+                feel at ease with them, and He made among you a feeling of love
+                and affection. Indeed, in that there are truly signs for a
+                person who thinks.&quot;
               </p>
 
               <footer className="text-orange-300 font-medium">
