@@ -75,7 +75,7 @@ const WeddingDetails = () => {
             <button className="relative px-6 md:px-8 py-3 border border-orange-500 text-sm md:text-base lg:text-lg font-medium text-orange-400 hover:text-white overflow-hidden transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:w-0 before:bg-orange-600 before:transition-all before:duration-500 before:ease-out hover:before:w-full inline-block items-center gap-2 whitespace-nowrap animate-gentle-pulse">
               <span className="relative z-10 uppercase flex items-center gap-2">
                 <MapPin className="w-4 h-4 md:w-5 md:h-5" />
-                Open Invitation
+                Open Maps
               </span>
             </button>
           </div>

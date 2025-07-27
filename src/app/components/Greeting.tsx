@@ -1,6 +1,6 @@
 import React from "react";
 
-const Gretting = () => {
+const Greeting = () => {
   return (
     <div
       className="min-h-screen flex items-center justify-center p-4 relative overflow-hidden"
@@ -49,7 +49,7 @@ const Gretting = () => {
                 className="text-2xl md:text-3xl text-white/90 font-arabic leading-relaxed mb-4"
                 dir="rtl"
               >
-                يَتَفَكَّرُون
+                يَتَفَكَّرُون
               </p>
             </div>
           </div>
@@ -302,4 +302,4 @@ const Gretting = () => {
   );
 };
 
-export default Gretting;
+export default Greeting;
