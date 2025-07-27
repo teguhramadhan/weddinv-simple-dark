@@ -11,7 +11,7 @@ interface HeartPos {
   duration: string;
 }
 
-export function Hero() {
+export default function Hero() {
   const [hearts, setHearts] = useState<HeartPos[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
