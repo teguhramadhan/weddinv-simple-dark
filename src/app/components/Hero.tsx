@@ -13,7 +13,6 @@ interface HeartPos {
 
 export default function Hero() {
   const [hearts, setHearts] = useState<HeartPos[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
@@ -34,10 +33,9 @@ export default function Hero() {
   }, [isVisible]);
 
   const handleOpen = () => {
-    setIsOpen(true);
     setTimeout(() => {
       setIsVisible(false);
-    }, 700); // Durasi sama dengan animasi exit
+    }, 700); // Duration matches the exit animation
   };
 
   return (
