@@ -87,9 +87,9 @@ export default function Gallery() {
           },
         },
       }}
-      className="pb-1 pt-6 md:pt-12 lg:pt-24 bg-white"
+      className="md:pt-12 lg:pt-24"
     >
-      <div className="max-w-full mx-auto px-1">
+      <div className="max-w-full mx-auto">
         <motion.div
           variants={{
             hidden: { opacity: 0, y: 30 },
@@ -99,7 +99,7 @@ export default function Gallery() {
           className="text-center mb-12"
         >
           <Camera className="w-12 h-12 mx-auto text-orange-400 mb-4" />
-          <h2 className="text-2xl md:text-5xl font-light font-italiana text-black">
+          <h2 className="text-2xl md:text-5xl font-light font-italiana text-white">
             Our Captured Moment
           </h2>
           <p className="text-gray-400 text-xs md:text-lg mt-1 md:mt-6">
@@ -108,7 +108,7 @@ export default function Gallery() {
         </motion.div>
 
         {/* Grid responsive */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+        <div className="grid grid-cols-1 md:grid-cols-3">
           {galleryImages.map((image) => (
             <motion.div
               key={image.id}

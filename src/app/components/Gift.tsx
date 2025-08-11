@@ -9,6 +9,7 @@ import {
   QrCode,
   X,
   Gift,
+  MapPin,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -20,11 +21,27 @@ const GiftSection = () => {
   const copyToClipboard = async (text: string, type: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      window.navigator.vibrate?.(50); // Haptic feedback di mobile
+      // Safe vibration with fallback
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
       setCopiedText(type);
       setTimeout(() => setCopiedText(""), 2000);
     } catch (err) {
       console.error("Failed to copy text: ", err);
+      // Fallback for older browsers
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand("copy");
+        setCopiedText(type);
+        setTimeout(() => setCopiedText(""), 2000);
+      } catch (fallbackErr) {
+        console.error("Fallback copy failed: ", fallbackErr);
+      }
+      document.body.removeChild(textArea);
     }
   };
 
@@ -65,6 +82,13 @@ const GiftSection = () => {
     province: "DKI Jakarta",
   };
 
+  // Handle escape key
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      setIsModalOpen(false);
+    }
+  };
+
   return (
     <div className="bg-black text-white py-16 px-4">
       <div className="max-w-full mx-auto">
@@ -81,9 +105,10 @@ const GiftSection = () => {
 
           <button
             onClick={() => setIsModalOpen(true)}
-            className="relative py-4 px-8 border border-orange-500 text-sm md:text-base lg:text-lg font-medium text-orange-400 hover:text-white overflow-hidden transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:w-0 before:bg-orange-600 before:transition-all before:duration-500 before:ease-out hover:before:w-full inline-block items-center gap-2 whitespace-nowrap"
+            className="relative py-4 px-8 border border-orange-500 text-sm md:text-base lg:text-lg font-medium text-orange-400 hover:text-white overflow-hidden transition-all duration-300 before:content-[''] before:absolute before:inset-0 before:w-0 before:bg-orange-600 before:transition-all before:duration-500 before:ease-out hover:before:w-full"
+            aria-label="Open gift information modal"
           >
-            <span className="relative inline-flex gap-4 z-10">
+            <span className="relative flex items-center gap-2 z-10">
               <Gift className="w-4 h-4 md:w-5 md:h-5" />
               Open Gift Info
             </span>
@@ -105,28 +130,35 @@ const GiftSection = () => {
           <motion.div
             aria-modal="true"
             role="dialog"
+            aria-labelledby="gift-modal-title"
             className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsModalOpen(false)} // Klik backdrop
+            onClick={() => setIsModalOpen(false)}
+            onKeyDown={handleKeyDown}
+            tabIndex={-1}
           >
             <motion.div
               initial={{ scale: 0.9, y: 30, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 30, opacity: 0 }}
               transition={{ duration: 0.35, ease: "easeInOut" }}
-              className="bg-black/20 border border-white/20 max-w-6xl w-full max-h-[90vh] overflow-y-auto my-12"
-              onClick={(e) => e.stopPropagation()} // Stop bubble
+              className="bg-black/20 backdrop-blur-sm border border-white/20 max-w-6xl w-full max-h-[90vh] overflow-y-auto my-12 rounded-lg"
+              onClick={(e) => e.stopPropagation()}
             >
               {/* Modal Header */}
               <div className="flex items-center justify-between p-6 border-b border-white/20">
-                <h3 className="text-2xl font-semibold text-orange-400 font-italiana">
+                <h3
+                  id="gift-modal-title"
+                  className="text-2xl font-semibold text-orange-400 font-italiana"
+                >
                   Gift Information
                 </h3>
                 <button
                   onClick={() => setIsModalOpen(false)}
-                  className="text-gray-400 hover:text-white transition"
+                  className="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10"
+                  aria-label="Close modal"
                 >
                   <X className="w-6 h-6" />
                 </button>
@@ -146,16 +178,18 @@ const GiftSection = () => {
                       {bankAccounts.map((account, index) => (
                         <div
                           key={index}
-                          className="bg-neutral-800 p-6 border border-white/10"
+                          className="bg-neutral-800 p-6 border border-white/10 rounded-lg"
                         >
                           <div className="flex items-center gap-3 mb-4">
-                            <Image
-                              src={account.logo}
-                              alt={`${account.bank} logo`}
-                              width={64}
-                              height={64}
-                              className="w-16 h-16 object-contain"
-                            />
+                            <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center">
+                              <Image
+                                src={account.logo}
+                                alt={`${account.bank} logo`}
+                                width={64}
+                                height={64}
+                                className="w-12 h-12 object-contain"
+                              />
+                            </div>
                             <h5 className="text-lg font-bold text-orange-400">
                               {account.bank}
                             </h5>
@@ -166,7 +200,7 @@ const GiftSection = () => {
                               <p className="text-sm text-gray-400 mb-1">
                                 Nomor Rekening
                               </p>
-                              <div className="flex items-center justify-between bg-neutral-700 p-3">
+                              <div className="flex items-center justify-between bg-neutral-700 p-3 rounded">
                                 <span className="font-mono text-sm">
                                   {account.accountNumber}
                                 </span>
@@ -177,7 +211,8 @@ const GiftSection = () => {
                                       `${account.bank}-number`
                                     )
                                   }
-                                  className="text-orange-400 hover:text-orange-300 transition"
+                                  className="text-orange-400 hover:text-orange-300 transition-colors p-1 rounded"
+                                  aria-label={`Copy ${account.bank} account number`}
                                 >
                                   {copiedText === `${account.bank}-number` ? (
                                     <Check className="w-4 h-4" />
@@ -192,7 +227,7 @@ const GiftSection = () => {
                               <p className="text-sm text-gray-400 mb-1">
                                 Atas Nama
                               </p>
-                              <div className="flex items-center justify-between bg-neutral-700 p-3">
+                              <div className="flex items-center justify-between bg-neutral-700 p-3 rounded">
                                 <span className="text-sm">
                                   {account.accountName}
                                 </span>
@@ -203,7 +238,8 @@ const GiftSection = () => {
                                       `${account.bank}-name`
                                     )
                                   }
-                                  className="text-orange-400 hover:text-orange-300 transition"
+                                  className="text-orange-400 hover:text-orange-300 transition-colors p-1 rounded"
+                                  aria-label={`Copy ${account.bank} account name`}
                                 >
                                   {copiedText === `${account.bank}-name` ? (
                                     <Check className="w-4 h-4" />
@@ -230,17 +266,18 @@ const GiftSection = () => {
                       {ewallets.map((ewallet, index) => (
                         <div
                           key={index}
-                          className="bg-neutral-800 p-6 border border-white/10"
+                          className="bg-neutral-800 p-6 border border-white/10 rounded-lg"
                         >
                           <div className="flex items-center gap-3 mb-4">
-                            <Image
-                              src={ewallet.logo}
-                              alt={`${ewallet.type} logo`}
-                              width={64}
-                              height={64}
-                              className="w-16 h-16 object-contain"
-                            />
-
+                            <div className="w-16 h-16 bg-white rounded-lg flex items-center justify-center">
+                              <Image
+                                src={ewallet.logo}
+                                alt={`${ewallet.type} logo`}
+                                width={64}
+                                height={64}
+                                className="w-12 h-12 object-contain"
+                              />
+                            </div>
                             <h5 className="text-lg font-bold text-orange-400">
                               {ewallet.type}
                             </h5>
@@ -251,7 +288,7 @@ const GiftSection = () => {
                               <p className="text-sm text-gray-400 mb-1">
                                 Nomor
                               </p>
-                              <div className="flex items-center justify-between bg-neutral-700 p-3">
+                              <div className="flex items-center justify-between bg-neutral-700 p-3 rounded">
                                 <span className="font-mono text-sm">
                                   {ewallet.number}
                                 </span>
@@ -262,7 +299,8 @@ const GiftSection = () => {
                                       `${ewallet.type}-number`
                                     )
                                   }
-                                  className="text-orange-400 hover:text-orange-300 transition"
+                                  className="text-orange-400 hover:text-orange-300 transition-colors p-1 rounded"
+                                  aria-label={`Copy ${ewallet.type} number`}
                                 >
                                   {copiedText === `${ewallet.type}-number` ? (
                                     <Check className="w-4 h-4" />
@@ -277,7 +315,7 @@ const GiftSection = () => {
                               <p className="text-sm text-gray-400 mb-1">
                                 Atas Nama
                               </p>
-                              <div className="flex items-center justify-between bg-neutral-700 p-3">
+                              <div className="flex items-center justify-between bg-neutral-700 p-3 rounded">
                                 <span className="text-sm">{ewallet.name}</span>
                                 <button
                                   onClick={() =>
@@ -286,7 +324,8 @@ const GiftSection = () => {
                                       `${ewallet.type}-name`
                                     )
                                   }
-                                  className="text-orange-400 hover:text-orange-300 transition"
+                                  className="text-orange-400 hover:text-orange-300 transition-colors p-1 rounded"
+                                  aria-label={`Copy ${ewallet.type} account name`}
                                 >
                                   {copiedText === `${ewallet.type}-name` ? (
                                     <Check className="w-4 h-4" />
@@ -304,21 +343,23 @@ const GiftSection = () => {
 
                   {/* QRIS & Address */}
                   <div className="space-y-8">
+                    {/* QRIS Section */}
                     <div>
                       <div className="flex items-center gap-3 mb-6">
                         <QrCode className="w-6 h-6 text-orange-400" />
                         <h4 className="text-xl font-semibold">QRIS</h4>
                       </div>
 
-                      <div className="text-center bg-neutral-800 p-6 border border-white/10">
-                        <Image
-                          src="/images/ic/qris.jpg"
-                          alt="QRIS"
-                          width={128}
-                          height={128}
-                          className="w-32 h-32 object-contain mx-auto mb-4"
-                        />
-
+                      <div className="text-center bg-neutral-800 p-6 border border-white/10 rounded-lg">
+                        <div className="w-32 h-32 bg-white rounded-lg mx-auto mb-4 flex items-center justify-center">
+                          <Image
+                            src="/images/ic/qris.jpg"
+                            alt="QRIS QR Code"
+                            width={128}
+                            height={128}
+                            className="w-28 h-28 object-contain rounded"
+                          />
+                        </div>
                         <p className="text-gray-300 text-sm">
                           Scan QR Code untuk transfer melalui e-wallet atau
                           mobile banking.
@@ -326,10 +367,20 @@ const GiftSection = () => {
                       </div>
                     </div>
 
+                    {/* Address Section */}
                     <div>
-                      <div className="bg-neutral-800 p-6 border border-white/10">
+                      <div className="flex items-center gap-3 mb-6">
+                        <MapPin className="w-6 h-6 text-orange-400" />
+                        <h4 className="text-xl font-semibold">
+                          Alamat Pengiriman
+                        </h4>
+                      </div>
+
+                      <div className="bg-neutral-800 p-6 border border-white/10 rounded-lg">
                         <div className="space-y-2 mb-4">
-                          <p className="font-semibold">Sarah & James</p>
+                          <p className="font-semibold text-orange-400">
+                            Sarah & James
+                          </p>
                           <p className="text-gray-300 text-sm">
                             {address.street}
                           </p>
@@ -351,7 +402,8 @@ const GiftSection = () => {
                               "address"
                             )
                           }
-                          className="w-full bg-orange-400 hover:bg-orange-500 text-black font-semibold py-3 px-4 flex items-center justify-center gap-2 transition"
+                          className="w-full bg-orange-400 hover:bg-orange-500 text-black font-semibold py-3 px-4 flex items-center justify-center gap-2 transition-colors rounded"
+                          aria-label="Copy complete address"
                         >
                           {copiedText === "address" ? (
                             <>
