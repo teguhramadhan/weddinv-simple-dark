@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { db } from "../lib/firebase";
 import { collection, getDocs } from "firebase/firestore";
-import { Guest } from "../types/guest";
 import HeroInvitation from "../components/HeroInvitation";
 import GiftSection from "../components/Gift";
 import Footer from "../components/Footer";
@@ -60,6 +59,7 @@ function generateUrlSlugFromName(fullName: string) {
 
 interface Props {
   params: { guestname: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export default async function GuestPage({ params }: Props) {
